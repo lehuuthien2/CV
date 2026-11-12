@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 34pt 46pt 44pt 46pt;
+    @bottom-left {
+      content: "Le Huu Thien — Backend Developer";
+      font-family: 'Lato', 'Liberation Sans', sans-serif;
+      font-size: 8.2pt;
+      color: #64748B;
+      border-top: 0.75pt solid #E2E8F0;
+      padding-top: 6pt;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'Lato', 'Liberation Sans', sans-serif;
+      font-size: 8.2pt;
+      color: #64748B;
+      border-top: 0.75pt solid #E2E8F0;
+      padding-top: 6pt;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Lato', 'Liberation Sans', sans-serif;
+    color: #334155;
+    font-size: 8.6pt;
+    line-height: 1.36;
+    background: #FFFFFF;
+  }
+
+  /* Header */
+  .header {
+    padding-bottom: 8pt;
+    border-bottom: 1.5pt solid #0F172A;
+    margin-bottom: 9pt;
+  }
+
+  .name {
+    font-size: 21pt;
+    font-weight: 700;
+    color: #0F172A;
+    letter-spacing: 0.3pt;
+    line-height: 1.12;
+    margin-bottom: 2pt;
+  }
+
+  .role-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #2563EB;
+    letter-spacing: 0.4pt;
+    margin-bottom: 5pt;
+  }
+
+  .contact-row {
+    font-size: 8.5pt;
+    color: #334155;
+    margin-bottom: 2pt;
+  }
+
+  .contact-row strong {
+    color: #0F172A;
+    font-weight: 700;
+  }
+
+  .contact-row a {
+    color: #2563EB;
+    text-decoration: none;
+  }
+
+  .contact-sep {
+    margin: 0 9pt;
+    color: #94A3B8;
+  }
+
+  /* Section Headings */
+  .section {
+    margin-bottom: 9pt;
+  }
+
+  .section-title {
+    font-size: 9.6pt;
+    font-weight: 700;
+    color: #0F172A;
+    text-transform: uppercase;
+    letter-spacing: 0.4pt;
+    padding-bottom: 3pt;
+    border-bottom: 0.75pt solid #CBD5E1;
+    margin-bottom: 6pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Summary */
+  .summary-text {
+    font-size: 8.7pt;
+    color: #334155;
+    line-height: 1.38;
+  }
+
+  /* Technical Skills Table */
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .skills-table td {
+    vertical-align: top;
+    padding: 1.8pt 0;
+    font-size: 8.5pt;
+  }
+
+  .skills-label {
+    width: 128pt;
+    font-weight: 700;
+    color: #0F172A;
+    padding-right: 8pt;
+  }
+
+  .skills-value {
+    color: #334155;
+    line-height: 1.34;
+  }
+
+  /* Work Experience */
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .job-company-role {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .job-company-role .sep {
+    color: #64748B;
+    font-weight: 400;
+    margin: 0 4pt;
+  }
+
+  .job-company-role .role {
+    color: #1E293B;
+    font-weight: 700;
+  }
+
+  .job-date {
+    font-size: 8.4pt;
+    font-weight: 700;
+    color: #64748B;
+    white-space: nowrap;
+  }
+
+  .job-intro {
+    font-size: 8.6pt;
+    color: #334155;
+    margin-bottom: 4pt;
+    line-height: 1.36;
+  }
+
+  /* Bullet Lists */
+  .bullet-list {
+    list-style: none;
+    padding-left: 6pt;
+  }
+
+  .bullet-list li {
+    position: relative;
+    padding-left: 9pt;
+    margin-bottom: 2.8pt;
+    font-size: 8.5pt;
+    color: #334155;
+    line-height: 1.35;
+  }
+
+  .bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #0F172A;
+    font-weight: 700;
+  }
+
+  .bullet-list li strong {
+    color: #0F172A;
+    font-weight: 700;
+  }
+
+  /* Project Cards */
+  .project-card {
+    background-color: #F8FAFC;
+    border: 0.75pt solid #E2E8F0;
+    border-left: 3pt solid #2563EB;
+    border-radius: 3pt;
+    padding: 6.5pt 9pt;
+    margin-bottom: 7pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Featured Highlight Card for Umbalena */
+  .project-card.featured {
+    background-color: #EFF6FF;
+    border: 0.75pt solid #BFDBFE;
+    border-left: 3.5pt solid #1D4ED8;
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5pt;
+  }
+
+  .project-name {
+    font-size: 9.2pt;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .project-badge {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #1D4ED8;
+    text-transform: uppercase;
+    letter-spacing: 0.3pt;
+    white-space: nowrap;
+  }
+
+  .project-card.featured .project-badge {
+    background-color: #DBEAFE;
+    padding: 1.5pt 5pt;
+    border-radius: 2pt;
+    color: #1E40AF;
+  }
+
+  .project-tech {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #2563EB;
+    margin-bottom: 4pt;
+  }
+
+  .project-card .bullet-list {
+    padding-left: 1pt;
+  }
+
+  .project-card .bullet-list li {
+    margin-bottom: 2.2pt;
+  }
+
+  .project-card .bullet-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Keep Halovi section title glued to its first card */
+  .halovi-section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Education Cards */
+  .edu-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10pt;
+    margin-bottom: 6.5pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .edu-card {
+    flex: 1;
+    background-color: #F8FAFC;
+    border: 0.75pt solid #E2E8F0;
+    border-radius: 3pt;
+    padding: 7pt 9pt;
+  }
+
+  .edu-school {
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 2pt;
+  }
+
+  .edu-degree {
+    font-size: 8.3pt;
+    color: #334155;
+    margin-bottom: 3.5pt;
+  }
+
+  .edu-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.8pt;
+  }
+
+  .edu-date {
+    color: #64748B;
+  }
+
+  .grade-excellent {
+    font-weight: 700;
+    color: #15803D;
+  }
+
+  .grade-good {
+    font-weight: 700;
+    color: #1D4ED8;
+  }
+
+  .edu-bottom {
+    background-color: #F8FAFC;
+    border: 0.75pt solid #E2E8F0;
+    border-radius: 3pt;
+    padding: 5.5pt 9pt;
+    font-size: 8.5pt;
+    color: #334155;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .edu-bottom strong {
+    color: #0F172A;
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="name">LE HUU THIEN</div>
+    <div class="role-title">BACKEND DEVELOPER</div>
+    <div class="contact-row">
+      <strong>Location:</strong> Da Nang, Vietnam
+      <span class="contact-sep">|</span>
+      <strong>Phone:</strong> +84 905 268 142
+      <span class="contact-sep">|</span>
+      <strong>Email:</strong> <a href="mailto:huuthien8142@gmail.com">huuthien8142@gmail.com</a>
+    </div>
+    <div class="contact-row">
+      <strong>GitHub:</strong> <a href="https://github.com/lehuuthien2">github.com/lehuuthien2</a>
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <div class="summary-text">
+      Results-driven Backend Developer with 7+ years of experience building, scaling, and maintaining business web platforms, IoT monitoring solutions, and digital applications. Primary expertise in Node.js (NestJS, AdonisJS) and PHP (Laravel) with strong ownership of RESTful API architecture, database modeling, real-time message streaming, background queue processing, and containerized deployment on Docker. Proven capability in optimizing system performance and executing high-concurrency load stress tests using Apache JMeter (~1,000 req/s).
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <table class="skills-table">
+      <tr>
+        <td class="skills-label">Backend &amp; Languages:</td>
+        <td class="skills-value">Node.js, NestJS, AdonisJS, PHP (Laravel), TypeScript, JavaScript, Java (Foundational), RESTful APIs.</td>
+      </tr>
+      <tr>
+        <td class="skills-label">Databases &amp; Storage:</td>
+        <td class="skills-value">PostgreSQL, MySQL, MongoDB, Redis (Caching, Pub/Sub, Data Queues), MinIO Object Storage.</td>
+      </tr>
+      <tr>
+        <td class="skills-label">Messaging &amp; Streaming:</td>
+        <td class="skills-value">Redis Pub/Sub, Background Jobs, Cron Task Schedulers, Real-Time Video Metadata Ingestion.</td>
+      </tr>
+      <tr>
+        <td class="skills-label">DevOps &amp; Infrastructure:</td>
+        <td class="skills-value">Docker, Docker Compose, Docker Swarm, Linux (Ubuntu), Nginx, Traefik, PM2, GHCR.</td>
+      </tr>
+      <tr>
+        <td class="skills-label">Testing &amp; Architecture:</td>
+        <td class="skills-value">Database Design, JWT, RBAC Governance, Apache JMeter (Load Testing), Query Optimization.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+    <div class="job-header">
+      <div class="job-company-role">
+        HALOVI INFORMATION TECHNOLOGY JSC <span class="sep">|</span> <span class="role">Backend Developer / Core Systems Engineer</span>
+      </div>
+      <div class="job-date">12/2018 – Present</div>
+    </div>
+    <div class="job-intro">
+      Develop and maintain Backend systems for web applications, business management platforms, and monitoring solutions using Node.js (AdonisJS) and PHP (Laravel).
+    </div>
+    <ul class="bullet-list">
+      <li><strong>Core Backend Engineering:</strong> Participated in system design and feature development for web applications, business management software, and IoT telemetry tracking systems built with Node.js (NestJS, AdonisJS) and PHP (Laravel).</li>
+      <li><strong>Database Schema &amp; Performance:</strong> Design high-efficiency database structures across PostgreSQL, MySQL, and MongoDB. Execute indexing strategies and query profiling to maintain low latency under high transaction volume.</li>
+      <li><strong>Asynchronous &amp; Message Processing:</strong> Implement queue architectures, Redis Pub/Sub events, and automated cron tasks for real-time telemetry streaming and background document exports.</li>
+      <li><strong>API Security &amp; RBAC:</strong> Standardize RESTful APIs with fine-grained Role-Based Access Control (RBAC), multi-tenant data boundaries, and JWT/OAuth2 authentication.</li>
+      <li><strong>Load Testing &amp; Profiling:</strong> Execute stress performance tests using Apache JMeter to handle traffic surges up to ~1,000 requests per second, resolving memory bottlenecks and ensuring overall stability.</li>
+      <li><strong>Containerized DevOps Operations:</strong> Deploy and manage containerized production environments on Linux/Ubuntu servers utilizing Docker Compose, Docker Swarm, Nginx, and Traefik reverse proxies.</li>
+    </ul>
+  </div>
+
+  <!-- FEATURED CLIENT / CONTRACT PROJECT -->
+  <div class="section">
+    <div class="section-title">Featured Client &amp; Contract Project</div>
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-name">Umbalena – Children's Reading Platform (2022 – 2025)</div>
+        <div class="project-badge">Contracted Startup Project</div>
+      </div>
+      <div class="project-tech">Tech Stack: Node.js, NestJS, PostgreSQL, MongoDB, Redis, MinIO, Docker</div>
+      <ul class="bullet-list">
+        <li><strong>Backend Development Ownership:</strong> Contracted by the client startup to take single-handed ownership of backend engineering, database layout, and API creation for both Web and Mobile apps.</li>
+        <li><strong>In-App Purchases &amp; Subscriptions:</strong> Integrated cross-platform payment systems with Apple App Store (IAP) and Google Play Billing, supporting auto-renewable monthly subscriptions, one-time purchases, and consumable multi-purchase packages.</li>
+        <li><strong>Module Modernization:</strong> Migrated legacy reading modules into a structured backend service layer, enhancing operational speed and reliability.</li>
+        <li><strong>Apache JMeter Stress Testing:</strong> Conducted heavy load testing reaching ~1,000 requests per second, optimizing cache tiers for seamless throughput.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- HALOVI COMPANY PROJECTS (Starts cleanly at top of Page 2 with its projects!) -->
+  <div class="section halovi-section">
+    <div class="section-title">HALOVI Company Projects</div>
+
+    <!-- Project 1: HRM -->
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">1. Human Resource Management System (HRM Platform)</div>
+        <div class="project-badge">HALOVI Project</div>
+      </div>
+      <div class="project-tech">Tech Stack: Node.js, AdonisJS, PostgreSQL, Redis</div>
+      <ul class="bullet-list">
+        <li><strong>Core Payroll &amp; HR Services:</strong> Developed backend services for company-wide HR management, timesheet collection, shift tracking, and custom payroll calculations.</li>
+        <li><strong>Attendance &amp; Compensation Rules:</strong> Built attendance aggregation algorithms and work-unit calculation engines tailored to distinct employee compensation rules.</li>
+        <li><strong>Automated Reporting:</strong> Engineered background job queues for automated monthly payroll calculations and high-volume Excel export reporting.</li>
+      </ul>
+    </div>
+
+    <!-- Project 2: Railway Inspection -->
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">2. Railway Track Inspection Monitoring System</div>
+        <div class="project-badge">HALOVI Project</div>
+      </div>
+      <div class="project-tech">Tech Stack: PHP, Laravel, MySQL, Redis Pub/Sub</div>
+      <ul class="bullet-list">
+        <li><strong>Real-Time Telemetry Processing:</strong> Developed backend tracking services to process continuous real-time telemetry, GPS coordinates, and speed data from ~300 connected hardware devices.</li>
+        <li><strong>Event Broadcasting:</strong> Integrated Redis Pub/Sub for instant event broadcasting and data updates to supervisor monitoring dashboards.</li>
+        <li><strong>Low-Latency Multi-Unit Tracking:</strong> Delivered low-latency location data updates (~5-second refresh frequency) across 15 operational railway units.</li>
+      </ul>
+    </div>
+
+    <!-- Project 3: Train Passenger Counting -->
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">3. Train Passenger Counting &amp; Analytical System</div>
+        <div class="project-badge">HALOVI Project</div>
+      </div>
+      <div class="project-tech">Tech Stack: Node.js, AdonisJS, MongoDB, Real-time Computer Vision Pipelines</div>
+      <ul class="bullet-list">
+        <li><strong>Internal AI Pipeline Integration:</strong> Built backend integrations to digest data from our internal team's real-time Computer Vision and video analytics system.</li>
+        <li><strong>Data &amp; Camera Feed Ingestion:</strong> Engineered ingestion services for passenger count metrics and IP camera video feeds streamed directly from moving train carriages.</li>
+        <li><strong>Occupancy Analytics:</strong> Built aggregation data models to produce detailed occupancy reports categorized by carriage number and railway sector.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCATION & TRAINING -->
+  <div class="section">
+    <div class="section-title">Education &amp; Training</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-school">iViettech Professional Programmer Training Center</div>
+        <div class="edu-degree">Professional PHP Developer Certification</div>
+        <div class="edu-meta">
+          <span class="edu-date">06/2018 – 12/2018</span>
+          <span class="grade-excellent">Grade: Excellent</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">iViettech Professional Programmer Training Center</div>
+        <div class="edu-degree">Java Programmer Foundation Program</div>
+        <div class="edu-meta">
+          <span class="edu-date">04/2015 – 01/2016</span>
+          <span class="grade-good">Grade: Good</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-bottom">
+      <strong>High School Graduation Certificate</strong> — High School Graduate
+    </div>
+  </div>
+
+</body>
+</html>
